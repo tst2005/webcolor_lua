@@ -1,4 +1,4 @@
-require('x_webcolor')
+local Color = require('x_webcolor')
 
 function print_color(name,color,valid)
   if (valid) then

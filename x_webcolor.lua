@@ -62,8 +62,9 @@
       Use your favorite HTML color tool to find good colors.
 ]]
 
-require('lib_class')
+local class = require('lib_class')
 
+local
 Color = class()
 Color.version = 1.0
 
@@ -71,17 +72,17 @@ Color.version = 1.0
 ----									LOCALISED VARIABLES										----
 ----------------------------------------------------------------------------------------------------
 
-local ssub = string.sub
-local slen = string.len
-local supp = string.upper
-local slow = string.lower
-local sfmt = string.format
-local print = print
-local type = type
-local tonumber = tonumber
-local assert = assert
-local mMax = math.max
-local mMin = math.min
+local ssub = assert(string.sub)
+local slen = assert(string.len)
+local supp = assert(string.upper)
+local slow = assert(string.lower)
+local sfmt = assert(string.format)
+local print = assert(print)
+local type = assert(type)
+local tonumber = assert(tonumber)
+local assert = assert(assert)
+local mMax = assert(math.max)
+local mMin = assert(math.min)
 local round = function(num, idp)
   local mult = 10^(idp or 0)
   return math.floor(num * mult + 0.5) / mult
@@ -91,6 +92,7 @@ end
 ----									PUBLIC METHODS											----
 ----------------------------------------------------------------------------------------------------
 function Color:init(...)
+local arg = {...}
   -- You can either supply a hexstring as the starting color value
   -- or 3 or 4 parameters (r,g,b[,a])
   -- If no parameters are supplied then the color defaults to black
@@ -113,7 +115,6 @@ function Color:set(colorstr)
   assert(type(colorstr) == "string", "Color:set() expects a string to set the color to e.g. 'FF00FF'")
   local len = slen(colorstr)
   assert(len == 3 or len == 4 or len == 6 or len == 8, "Invalid length for color string. 3,4,6 or 8 expected.")
-
   -- always convert input to 8 uppcase hex digits (RRGGBBAA)
   colorstr = supp(colorstr)
   if (len == 3 or len == 4) then
@@ -292,4 +293,4 @@ function Color:setColorOn(obj)
   obj:setColor(self.r,self.g,self.b,self.a)
 end
 
-
+return Color
